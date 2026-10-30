@@ -4,17 +4,17 @@
     <div class="filter-bar">
       <div class="filter-left">
         <el-radio-group v-model="statusFilter" @change="fetchOrders">
-          <el-radio-button label="ALL">全部訂單 ({{ orders.length }})</el-radio-button>
-          <el-radio-button label="PENDING_PAYMENT">
+          <el-radio-button value="ALL">全部訂單 ({{ orders.length }})</el-radio-button>
+          <el-radio-button value="PENDING_PAYMENT">
             待付款
             <el-badge :value="pendingPaymentCount" :hidden="pendingPaymentCount === 0" class="badge-dot" />
           </el-radio-button>
-          <el-radio-button label="COOKING">
+          <el-radio-button value="COOKING">
             製作中
             <el-badge :value="cookingCount" :hidden="cookingCount === 0" type="primary" class="badge-dot" />
           </el-radio-button>
-          <el-radio-button label="COMPLETED">已完成</el-radio-button>
-          <el-radio-button label="CANCELLED">已取消</el-radio-button>
+          <el-radio-button value="COMPLETED">已完成</el-radio-button>
+          <el-radio-button value="CANCELLED">已取消</el-radio-button>
         </el-radio-group>
       </div>
 
