@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Login from '../views/Login.vue';
-import Layout from '../views/Layout.vue';
-import Orders from '../views/Orders.vue';
-import Menu from '../views/Menu.vue';
-import Tables from '../views/Tables.vue';
-import Dashboard from '../views/Dashboard.vue';
+import Login from '../views/Login/index.vue';
+import Layout from '../views/Layout/index.vue';
+import Orders from '../views/Orders/index.vue';
+import Menu from '../views/Menu/index.vue';
+import Tables from '../views/Tables/index.vue';
+import Dashboard from '../views/Dashboard/index.vue';
 
 const routes = [
   {
@@ -49,12 +49,12 @@ const router = createRouter({
 router.beforeEach((to) => {
   const token = localStorage.getItem('admin_token');
   if (to.path !== '/login' && !token) {
-    return '/login'
-  } else if (to.path === '/login' && token) {
-    return '/orders'
-  } else {
-    return;
+    return '/login';
   }
+  if (to.path === '/login' && token) {
+    return '/orders';
+  }
+  return true;
 });
 
 export default router;

@@ -2,26 +2,15 @@ import { io, Socket } from 'socket.io-client';
 
 let socket: Socket | null = null;
 
-export const initAdminSocket = () => {
+export const initAdminSocket = (): Socket => {
   if (!socket) {
-    socket = io(window.location.origin, {
-      transports: ['websocket', 'polling'],
-    });
-
-    socket.on('connect', () => {
-      console.log('[Admin Socket] Connected:', socket?.id);
-      // Join admin notification room
-      socket?.emit('join', 'admin');
-    });
-
-    socket.on('disconnect', () => {
-      console.log('[Admin Socket] Disconnected');
-    });
+    const socketUrl = import.meta.env.VITE_SOCKET_URL || window.location.origin;
+    socket = io(socketUrl, { transports: ['websocket', 'polling'] });
+    socket.on('connect', () => socket?.emit('join', 'admin'));
   }
   return socket;
 };
 
-export const getAdminSocket = () => {
+export const getAdminSocket = (): Socket => {
   return socket || initAdminSocket();
 };
-

@@ -1,36 +1,30 @@
 import { defineStore } from 'pinia';
 import api from '../api';
-
-export interface AdminUserInfo {
-  id: number;
-  username: string;
-  name: string;
-  role: string;
-}
+import type { AdminUser, LoginForm, LoginResult } from '../types/auth';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: localStorage.getItem('admin_token') || '',
     user: (localStorage.getItem('admin_user')
       ? JSON.parse(localStorage.getItem('admin_user')!)
-      : null) as AdminUserInfo | null,
+      : null) as AdminUser | null,
   }),
   getters: {
     isAuthenticated: (state) => !!state.token,
   },
   actions: {
-    async login(form: { username: string; password: string }) {
-      const res: any = await api.post('/auth/login', form);
-      if (res.success && res.data) {
-        this.token = res.data.token;
-        this.user = res.data.user;
-        localStorage.setItem('admin_token', res.data.token);
-        localStorage.setItem('admin_user', JSON.stringify(res.data.user));
+    async login(form: LoginForm): Promise<boolean> {
+      const data = await api.post<LoginResult>('/auth/login', form);
+      if (data?.token) {
+        this.token = data.token;
+        this.user = data.user;
+        localStorage.setItem('admin_token', data.token);
+        localStorage.setItem('admin_user', JSON.stringify(data.user));
         return true;
       }
       return false;
     },
-    logout() {
+    logout(): void {
       this.token = '';
       this.user = null;
       localStorage.removeItem('admin_token');
@@ -39,4 +33,3 @@ export const useAuthStore = defineStore('auth', {
     },
   },
 });
-
