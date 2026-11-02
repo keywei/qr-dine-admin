@@ -48,7 +48,8 @@
     "logout": "登出",
     "newOrderTitle": "🔔 收到新訂單！",
     "newOrderMessageDineIn": "桌號 [{table}] 新進訂單 #{orderNo}，金額 NT$ {total}",
-    "newOrderMessageTakeout": "【外帶】新進訂單 #{orderNo}，金額 NT$ {total}"
+    "newOrderMessageTakeout": "【外帶】新進訂單 #{orderNo}，金額 NT$ {total}",
+    "menuStore": "門市設定"
   },
   "orders": {
     "title": "即時接單看板",
@@ -81,7 +82,9 @@
     "cancelOrder": "取消訂單",
     "cancelConfirm": "確定要取消此訂單嗎？",
     "cancelSuccess": "訂單 #{orderNo} 已取消",
-    "noOrders": "目前沒有符合條件的訂單"
+    "noOrders": "目前沒有符合條件的訂單",
+    "taxIdPrefix": "統編：",
+    "carrierPrefix": "載具："
   },
   "menu": {
     "title": "菜單與分類管理",
@@ -227,5 +230,23 @@
     "2006": "外帶顧客請務必提供聯絡電話",
     "2007": "線上支付款項扣款失敗",
     "2008": "餐點規格或必選項目未填寫完整"
+  },
+  "store": {
+    "setting": "門市設定",
+    "dialogTitle": "門市基本資訊設定",
+    "storeCode": "門市代號",
+    "storeCodePlaceholder": "例如：STORE001",
+    "name": "門市名稱",
+    "namePlaceholder": "例如：美味食堂 信義旗艦店",
+    "address": "門市地址",
+    "addressPlaceholder": "例如：台北市信義區忠孝東路五段 1 號",
+    "phone": "連絡電話",
+    "phonePlaceholder": "例如：02-2345-6789",
+    "businessHours": "營業時間",
+    "businessHoursPlaceholder": "例如：週一至週日 11:00 - 21:00",
+    "saveSuccess": "門市設定更新成功",
+    "loadError": "載入門市設定失敗",
+    "nameRequired": "請輸入門市名稱",
+    "subtitle": "維護門市名稱、聯絡電話、地址與營業時間等基本營運資訊"
   }
 }

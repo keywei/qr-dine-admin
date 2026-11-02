@@ -21,6 +21,7 @@ export const useLayoutNav = () => {
     '/menu': 'layout.menuMenu',
     '/tables': 'layout.menuTables',
     '/dashboard': 'layout.menuDashboard',
+    '/store': 'layout.menuStore',
   };
 
   const currentRouteTitle = computed(() => t(routeTitleMap[route.path] || 'layout.brandTitle'));

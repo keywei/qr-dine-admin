@@ -30,6 +30,8 @@ export interface Order {
   totalAmount: number;
   customerNote?: string | null;
   customerPhone?: string | null;
+  taxId?: string | null;
+  invoiceCarrier?: string | null;
   items: OrderItem[];
   createdAt: string;
   updatedAt: string;

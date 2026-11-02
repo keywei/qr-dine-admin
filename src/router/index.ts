@@ -6,6 +6,7 @@ import Orders from '../views/Orders/index.vue';
 import Menu from '../views/Menu/index.vue';
 import Tables from '../views/Tables/index.vue';
 import Dashboard from '../views/Dashboard/index.vue';
+import Store from '../views/Store/index.vue';
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
         path: 'dashboard',
         name: 'Dashboard',
         component: Dashboard,
+      },
+      {
+        path: 'store',
+        name: 'Store',
+        component: Store,
       },
     ],
   },

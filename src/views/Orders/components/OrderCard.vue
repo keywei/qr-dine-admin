@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-xl p-4 shadow-sm border-t-4 flex flex-col gap-3" :class="borderClass">
+  <div class="bg-white rounded-xl p-4 shadow-sm border-t-4 flex flex-col gap-3 min-w-0 overflow-hidden" :class="borderClass">
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-2">
         <el-tag v-if="order.diningType === 'DINE_IN'" size="large" effect="dark" type="danger" class="text-[15px] font-bold">
@@ -17,14 +17,25 @@
       </div>
     </div>
 
-    <div class="text-xs text-slate-600 bg-slate-50 px-2.5 py-1.5 rounded-md flex justify-between">
-      <div>{{ $t('orders.orderNoPrefix') }}{{ order.orderNo }}</div>
-      <div v-if="order.customerPhone">{{ $t('orders.phonePrefix') }}{{ order.customerPhone }}</div>
+    <div class="text-xs text-slate-600 bg-slate-50 px-2.5 py-1.5 rounded-md flex justify-between items-center gap-2 min-w-0 overflow-hidden">
+      <div class="shrink-0 font-medium">{{ $t('orders.orderNoPrefix') }}{{ order.orderNo }}</div>
+      <div v-if="order.customerPhone" class="break-all min-w-0 truncate text-right" :title="order.customerPhone">
+        {{ $t('orders.phonePrefix') }}{{ order.customerPhone }}
+      </div>
+    </div>
+
+    <div v-if="order.taxId || order.invoiceCarrier" class="flex flex-wrap gap-2 text-xs min-w-0 break-all">
+      <el-tag v-if="order.taxId" size="small" type="warning" effect="plain" class="max-w-full">
+        <span class="truncate">{{ $t('orders.taxIdPrefix') }}{{ order.taxId }}</span>
+      </el-tag>
+      <el-tag v-if="order.invoiceCarrier" size="small" type="info" effect="plain" class="max-w-full">
+        <span class="truncate">{{ $t('orders.carrierPrefix') }}{{ order.invoiceCarrier }}</span>
+      </el-tag>
     </div>
 
     <OrderItemList :items="order.items" />
 
-    <div v-if="order.customerNote" class="bg-amber-100 px-2.5 py-1.5 rounded-md text-xs text-amber-800">
+    <div v-if="order.customerNote" class="bg-amber-100 px-2.5 py-1.5 rounded-md text-xs text-amber-800 break-all whitespace-pre-wrap overflow-hidden">
       <span class="font-bold">{{ $t('orders.notePrefix') }}</span>
       <span>{{ order.customerNote }}</span>
     </div>

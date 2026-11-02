@@ -32,6 +32,10 @@
         <el-icon><DataLine /></el-icon>
         <span>{{ $t('layout.menuDashboard') }}</span>
       </el-menu-item>
+      <el-menu-item index="/store">
+        <el-icon><Setting /></el-icon>
+        <span>{{ $t('layout.menuStore') }}</span>
+      </el-menu-item>
     </el-menu>
 
     <div class="px-5 py-4 border-t border-slate-800 bg-slate-950">
@@ -50,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { Bell, Food, Grid, DataLine } from '@element-plus/icons-vue';
+import { Bell, Food, Grid, DataLine, Setting } from '@element-plus/icons-vue';
 
 defineProps<{ activeRoute: string; soundEnabled: boolean }>();
 defineEmits<{ (e: 'update:soundEnabled', val: boolean): void }>();
