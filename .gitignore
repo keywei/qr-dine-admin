@@ -26,3 +26,6 @@ dist-ssr
 # AI Rules & Customizations
 .agent/
 
+
+test-results/
+playwright-report/

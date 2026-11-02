@@ -16,7 +16,7 @@
         <el-input v-model="form.description" type="textarea" rows="2" :placeholder="$t('menu.itemFormDescPlaceholder')" />
       </el-form-item>
       <el-form-item :label="$t('menu.itemFormImage')">
-        <el-input v-model="form.imageUrl" :placeholder="$t('menu.itemFormImageUrlPlaceholder')" />
+        <DishImageUploader v-model="form.imageUrl" />
       </el-form-item>
       <el-form-item :label="$t('menu.itemFormSort')">
         <el-input-number v-model="form.sortOrder" :min="0" style="width: 120px" />
@@ -59,6 +59,7 @@
 
 <script setup lang="ts">
 import { Plus, Delete } from '@element-plus/icons-vue';
+import DishImageUploader from './DishImageUploader.vue';
 import type { Category, MenuItemForm } from '../../../types/menu';
 
 defineProps<{ visible: boolean; isEdit: boolean; saving: boolean; form: MenuItemForm; categories: Category[] }>();

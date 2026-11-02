@@ -124,7 +124,7 @@
     "itemFormDescPlaceholder": "介紹餐點特色、風味或食材",
     "itemFormImage": "餐點圖片",
     "itemFormImageUrlPlaceholder": "或直接貼上圖片網址 (URL)",
-    "uploadHint": "支援 JPG、PNG、WEBP，檔案小於 5MB",
+    "uploadHint": "支援 JPG、PNG、WEBP，大於 1MB 將自動於背景無損壓縮",
     "uploadSuccess": "圖片上傳成功",
     "itemFormSort": "排序權重",
     "itemFormSortHint": "數字愈小愈靠前",
@@ -140,7 +140,12 @@
     "addOptItem": "新增細項選項",
     "saveItem": "儲存餐點",
     "saveItemSuccess": "餐點儲存成功",
-    "nameAndCategoryRequired": "請填寫餐點品名與分類"
+    "nameAndCategoryRequired": "請填寫餐點品名與分類",
+    "uploadImage": "上傳圖片",
+    "replaceImage": "替換圖片",
+    "uploadFailed": "圖片上傳失敗，請重試",
+    "invalidImageType": "檔案格式不支援，僅限 JPG / PNG / WEBP 圖片",
+    "fileTooLarge": "檔案過大，上限為 10MB"
   },
   "tables": {
     "title": "桌號與 QR Code 管理",
