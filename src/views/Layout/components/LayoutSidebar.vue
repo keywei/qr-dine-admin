@@ -20,6 +20,10 @@
         <el-icon><Bell /></el-icon>
         <span>{{ $t('layout.menuOrders') }}</span>
       </el-menu-item>
+      <el-menu-item index="/queue">
+        <el-icon><User /></el-icon>
+        <span>{{ $t('layout.menuQueue') }}</span>
+      </el-menu-item>
       <el-menu-item index="/menu">
         <el-icon><Food /></el-icon>
         <span>{{ $t('layout.menuMenu') }}</span>
@@ -54,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { Bell, Food, Grid, DataLine, Setting } from '@element-plus/icons-vue';
+import { Bell, User, Food, Grid, DataLine, Setting } from '@element-plus/icons-vue';
 
 defineProps<{ activeRoute: string; soundEnabled: boolean }>();
 defineEmits<{ (e: 'update:soundEnabled', val: boolean): void }>();

@@ -3,6 +3,7 @@ import { getToken } from '../utils/auth';
 import Login from '../views/Login/index.vue';
 import Layout from '../views/Layout/index.vue';
 import Orders from '../views/Orders/index.vue';
+import Queue from '../views/Queue/index.vue';
 import Menu from '../views/Menu/index.vue';
 import Tables from '../views/Tables/index.vue';
 import Dashboard from '../views/Dashboard/index.vue';
@@ -23,6 +24,11 @@ const routes = [
         path: 'orders',
         name: 'Orders',
         component: Orders,
+      },
+      {
+        path: 'queue',
+        name: 'Queue',
+        component: Queue,
       },
       {
         path: 'menu',

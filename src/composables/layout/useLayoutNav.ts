@@ -18,6 +18,7 @@ export const useLayoutNav = () => {
 
   const routeTitleMap: Record<string, string> = {
     '/orders': 'layout.menuOrders',
+    '/queue': 'layout.menuQueue',
     '/menu': 'layout.menuMenu',
     '/tables': 'layout.menuTables',
     '/dashboard': 'layout.menuDashboard',
