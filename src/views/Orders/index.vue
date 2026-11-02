@@ -1,5 +1,5 @@
 <template>
-  <div class="orders-page">
+  <div class="flex flex-col gap-4">
     <OrderFilterBar
       v-model:status-filter="statusFilter"
       v-model:dining-type-filter="diningTypeFilter"
@@ -11,7 +11,7 @@
       @refresh="fetchOrders"
     />
 
-    <div v-loading="loading" class="order-grid">
+    <div v-loading="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       <el-empty v-if="filteredOrders.length === 0" :description="$t('orders.noOrders')" />
       <OrderCard
         v-for="order in filteredOrders"
@@ -45,8 +45,3 @@ const {
 
 const { confirmPayment, completeOrder, cancelOrder } = useOrderAction(fetchOrders);
 </script>
-
-<style scoped>
-.orders-page { display: flex; flex-direction: column; gap: 16px; }
-.order-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 18px; }
-</style>

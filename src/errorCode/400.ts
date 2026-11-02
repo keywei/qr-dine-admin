@@ -1,12 +1,14 @@
+import i18n from '../locales';
+
 export default {
-  400: '請求語法錯誤或參數不合法',
-  401: '未授權，登入身分已逾時',
-  403: '存取被拒絕，權限不足',
-  404: '請求的資源或端點不存在',
-  405: '不支援此 HTTP 請求方法',
-  408: '請求逾時，伺服器等待過久',
-  409: '資料衝突，可能已被其他使用者修改',
-  413: '請求酬載過大，超出伺服器處理限制',
-  422: '資料欄位格式驗證失敗',
-  429: '操作過於頻繁，已被系統限流，請稍後再試',
+  400: i18n.global.t('errorCode.400'),
+  401: i18n.global.t('errorCode.401'),
+  403: i18n.global.t('errorCode.403'),
+  404: i18n.global.t('errorCode.404'),
+  405: i18n.global.t('errorCode.405'),
+  408: i18n.global.t('errorCode.408'),
+  409: i18n.global.t('errorCode.409'),
+  413: i18n.global.t('errorCode.413'),
+  422: i18n.global.t('errorCode.422'),
+  429: i18n.global.t('errorCode.429'),
 } as const;

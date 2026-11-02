@@ -23,9 +23,9 @@
       </el-form-item>
 
       <el-divider content-position="left">{{ $t('menu.specsSection') }}</el-divider>
-      <div class="option-groups-container">
-        <div v-for="(grp, gIdx) in form.options" :key="gIdx" class="option-group-card">
-          <div class="group-header">
+      <div class="flex flex-col gap-3 bg-slate-50 p-3.5 rounded-lg">
+        <div v-for="(grp, gIdx) in form.options" :key="gIdx" class="bg-white p-3 rounded-lg border border-slate-200">
+          <div class="flex items-center gap-2.5 mb-2.5">
             <el-input v-model="grp.title" :placeholder="$t('menu.groupTitlePlaceholder')" style="width: 180px" />
             <el-select v-model="grp.type" style="width: 100px">
               <el-option :label="$t('menu.singleSelect')" value="SINGLE" />
@@ -34,8 +34,8 @@
             <el-checkbox v-model="grp.isRequired" :label="$t('menu.required')" />
             <el-button type="danger" link @click="form.options.splice(gIdx, 1)">{{ $t('menu.removeGroup') }}</el-button>
           </div>
-          <div class="group-items">
-            <div v-for="(opt, oIdx) in grp.options" :key="oIdx" class="opt-row">
+          <div class="pl-2.5 flex flex-col gap-2">
+            <div v-for="(opt, oIdx) in grp.options" :key="oIdx" class="flex items-center gap-2">
               <el-input v-model="opt.name" :placeholder="$t('menu.optNamePlaceholder')" style="width: 180px" />
               <el-input-number v-model="opt.extraPrice" :min="0" :step="5" style="width: 130px" />
               <el-button type="danger" text @click="grp.options.splice(oIdx, 1)"><el-icon><Delete /></el-icon></el-button>
@@ -64,11 +64,3 @@ import type { Category, MenuItemForm } from '../../../types/menu';
 defineProps<{ visible: boolean; isEdit: boolean; saving: boolean; form: MenuItemForm; categories: Category[] }>();
 defineEmits<{ (e: 'update:visible', val: boolean): void; (e: 'save'): void }>();
 </script>
-
-<style scoped>
-.option-groups-container { display: flex; flex-direction: column; gap: 12px; background: #f8fafc; padding: 14px; border-radius: 8px; }
-.option-group-card { background: #fff; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; }
-.group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.group-items { padding-left: 10px; display: flex; flex-direction: column; gap: 8px; }
-.opt-row { display: flex; align-items: center; gap: 8px; }
-</style>

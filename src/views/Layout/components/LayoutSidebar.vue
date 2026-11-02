@@ -1,17 +1,17 @@
 <template>
-  <el-aside width="240px" class="aside-menu">
-    <div class="brand">
-      <span class="brand-icon">🍜</span>
-      <div class="brand-text">
-        <span class="title">{{ $t('layout.brandTitle') }}</span>
-        <span class="subtitle">{{ $t('layout.brandSubtitle') }}</span>
+  <el-aside width="240px" class="bg-slate-900 text-white flex flex-col shrink-0">
+    <div class="h-16 flex items-center gap-3 px-5 border-b border-slate-800">
+      <span class="text-2xl">🍜</span>
+      <div class="flex flex-col">
+        <span class="text-base font-bold text-slate-50">{{ $t('layout.brandTitle') }}</span>
+        <span class="text-[11px] text-slate-500">{{ $t('layout.brandSubtitle') }}</span>
       </div>
     </div>
 
     <el-menu
       :default-active="activeRoute"
       router
-      class="custom-menu"
+      class="custom-menu !border-r-0 flex-1"
       background-color="#0f172a"
       text-color="#94a3b8"
       active-text-color="#38bdf8"
@@ -34,8 +34,8 @@
       </el-menu-item>
     </el-menu>
 
-    <div class="aside-footer">
-      <div class="sound-control">
+    <div class="px-5 py-4 border-t border-slate-800 bg-slate-950">
+      <div class="flex items-center justify-between text-xs text-slate-400">
         <span>{{ $t('layout.soundLabel') }}</span>
         <el-switch
           :model-value="soundEnabled"
@@ -55,29 +55,3 @@ import { Bell, Food, Grid, DataLine } from '@element-plus/icons-vue';
 defineProps<{ activeRoute: string; soundEnabled: boolean }>();
 defineEmits<{ (e: 'update:soundEnabled', val: boolean): void }>();
 </script>
-
-<style scoped>
-.aside-menu {
-  background-color: #0f172a;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-}
-.brand {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 20px;
-  border-bottom: 1px solid #1e293b;
-}
-.brand-icon { font-size: 28px; }
-.brand-text { display: flex; flex-direction: column; }
-.brand-text .title { font-size: 16px; font-weight: 700; color: #f8fafc; }
-.brand-text .subtitle { font-size: 11px; color: #64748b; }
-.custom-menu { border-right: none; flex: 1; }
-.custom-menu .el-menu-item { height: 52px; font-weight: 500; margin: 4px 10px; border-radius: 8px; }
-.custom-menu .el-menu-item.is-active { background-color: #1e293b !important; color: #38bdf8 !important; }
-.aside-footer { padding: 16px 20px; border-top: 1px solid #1e293b; background-color: #0b1120; }
-.sound-control { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #94a3b8; }
-</style>

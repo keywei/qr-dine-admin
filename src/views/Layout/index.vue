@@ -1,18 +1,18 @@
 <template>
-  <el-container class="layout-container">
+  <el-container class="h-screen bg-slate-50">
     <LayoutSidebar
       :active-route="activeRoute"
       v-model:sound-enabled="soundEnabled"
     />
 
-    <el-container class="main-wrapper">
+    <el-container direction="vertical" class="flex-1 !flex !flex-col overflow-hidden">
       <LayoutHeader
         :title="currentRouteTitle"
         :user-name="authStore.user?.name"
         @logout="handleLogout"
       />
 
-      <el-main class="content-body">
+      <el-main class="!p-5 overflow-y-auto !bg-slate-100 flex-1">
         <router-view />
       </el-main>
     </el-container>
@@ -26,20 +26,3 @@ import { useLayoutNav } from '../../composables/layout/useLayoutNav';
 
 const { authStore, soundEnabled, activeRoute, currentRouteTitle, handleLogout } = useLayoutNav();
 </script>
-
-<style scoped>
-.layout-container {
-  height: 100vh;
-  background-color: #f8fafc;
-}
-.main-wrapper {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-.content-body {
-  padding: 20px;
-  overflow-y: auto;
-  background-color: #f1f5f9;
-}
-</style>

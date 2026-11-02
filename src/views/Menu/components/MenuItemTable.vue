@@ -1,12 +1,12 @@
 <template>
-  <el-card shadow="never" class="table-card">
+  <el-card shadow="never" class="!rounded-xl !border-none">
     <el-table :data="items" v-loading="loading" stripe style="width: 100%">
       <el-table-column :label="$t('menu.image')" width="100">
         <template #default="{ row }">
           <el-image
             :src="row.imageUrl || defaultImage"
             fit="cover"
-            class="dish-img-thumb"
+            class="w-[54px] h-[54px] rounded-lg shadow-sm"
             :preview-src-list="[row.imageUrl || defaultImage]"
             preview-teleported
           />
@@ -15,9 +15,9 @@
 
       <el-table-column prop="name" :label="$t('menu.name')" min-width="160">
         <template #default="{ row }">
-          <div class="dish-name-cell">
-            <span class="name-text">{{ row.name }}</span>
-            <span class="desc-text">{{ row.description || '無描述' }}</span>
+          <div class="flex flex-col">
+            <span class="font-bold text-slate-800 text-sm">{{ row.name }}</span>
+            <span class="text-xs text-slate-500 mt-0.5">{{ row.description || $t('common.noDescription') }}</span>
           </div>
         </template>
       </el-table-column>
@@ -30,18 +30,18 @@
 
       <el-table-column :label="$t('menu.price')" width="110">
         <template #default="{ row }">
-          <span class="price-text">NT$ {{ row.price }}</span>
+          <span class="font-bold text-sky-600">NT$ {{ row.price }}</span>
         </template>
       </el-table-column>
 
       <el-table-column :label="$t('menu.specs')" min-width="200">
         <template #default="{ row }">
-          <div v-if="row.options?.length" class="specs-wrapper">
-            <el-tag v-for="grp in row.options" :key="grp.id" size="small" type="info" class="spec-tag">
+          <div v-if="row.options?.length" class="flex flex-wrap gap-1">
+            <el-tag v-for="grp in row.options" :key="grp.id" size="small" type="info" class="rounded">
               {{ grp.title }} ({{ $t('menu.specsCount', { count: grp.options.length }) }})
             </el-tag>
           </div>
-          <span v-else class="text-muted">{{ $t('menu.noSpecs') }}</span>
+          <span v-else class="text-xs text-slate-400">{{ $t('menu.noSpecs') }}</span>
         </template>
       </el-table-column>
 
@@ -83,15 +83,3 @@ defineEmits<{
   (e: 'toggleAvailability', item: MenuItem): void;
 }>();
 </script>
-
-<style scoped>
-.table-card { border-radius: 12px; border: none; }
-.dish-img-thumb { width: 54px; height: 54px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.dish-name-cell { display: flex; flex-direction: column; }
-.name-text { font-weight: 700; color: #1e293b; font-size: 14px; }
-.desc-text { font-size: 12px; color: #64748b; margin-top: 2px; }
-.price-text { font-weight: 700; color: #0284c7; }
-.specs-wrapper { display: flex; flex-wrap: wrap; gap: 4px; }
-.spec-tag { border-radius: 4px; }
-.text-muted { font-size: 12px; color: #94a3b8; }
-</style>

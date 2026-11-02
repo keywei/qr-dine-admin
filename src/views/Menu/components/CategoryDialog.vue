@@ -1,6 +1,6 @@
 <template>
   <el-dialog :model-value="visible" @update:model-value="$emit('update:visible', $event)" :title="$t('menu.categoryDialogTitle')" width="500px">
-    <div class="cat-create-row">
+    <div class="flex gap-2.5">
       <el-input :model-value="newName" @update:model-value="$emit('update:newName', $event)" :placeholder="$t('menu.categoryNamePlaceholder')" style="flex: 1" />
       <el-button type="primary" @click="$emit('createCategory')">{{ $t('menu.addCategory') }}</el-button>
     </div>
@@ -32,7 +32,3 @@ defineEmits<{
   (e: 'deleteCategory', id: number): void;
 }>();
 </script>
-
-<style scoped>
-.cat-create-row { display: flex; gap: 10px; }
-</style>

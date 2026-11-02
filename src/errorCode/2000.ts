@@ -1,11 +1,13 @@
+import i18n from '../locales';
+
 export default {
-  2000: '業務邏輯處理失敗',
-  2001: '餐點品項已估清或暫停供應',
-  2002: '桌號不存在或該桌已結帳封鎖',
-  2003: '購物車餐點明細為空，無法送出訂單',
-  2004: '訂單重複送出，請勿短時間連續點餐',
-  2005: '訂單狀態已變更，無法重複操作',
-  2006: '外帶顧客請務必提供聯絡電話',
-  2007: '線上支付款項扣款失敗',
-  2008: '餐點規格或必選項目未填寫完整',
+  2000: i18n.global.t('errorCode.2000'),
+  2001: i18n.global.t('errorCode.2001'),
+  2002: i18n.global.t('errorCode.2002'),
+  2003: i18n.global.t('errorCode.2003'),
+  2004: i18n.global.t('errorCode.2004'),
+  2005: i18n.global.t('errorCode.2005'),
+  2006: i18n.global.t('errorCode.2006'),
+  2007: i18n.global.t('errorCode.2007'),
+  2008: i18n.global.t('errorCode.2008'),
 } as const;

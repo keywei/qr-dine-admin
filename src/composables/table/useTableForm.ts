@@ -47,7 +47,7 @@ export const useTableForm = (onSuccess: () => void) => {
 
   const deleteTable = async (id: number) => {
     await api.delete(`/tables/${id}`);
-    ElMessage.success(t('tables.deleteSuccess'));
+    ElMessage.success(t('tables.deleteTableSuccess'));
     onSuccess();
   };
 

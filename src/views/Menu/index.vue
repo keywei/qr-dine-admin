@@ -1,10 +1,10 @@
 <template>
-  <div class="menu-page">
+  <div class="flex flex-col gap-4">
     <MenuHeader
       :categories="categories"
       v-model:selected-category="selectedCategory"
       v-model:search-query="searchQuery"
-      @open-create-item="openCreate(categories[0]?.id)"
+      @open-create-item="openCreate"
       @open-category="catVisible = true"
     />
 
@@ -45,7 +45,7 @@ import { useMenuItemForm } from '../../composables/menu/useMenuItemForm';
 import { useCategoryAction } from '../../composables/menu/useCategoryAction';
 import api from '../../api';
 
-const { categories, loading, selectedCategory, searchQuery, filteredItems, fetchCategories, fetchMenuItems } = useMenuQuery();
+const { categories, selectedCategory, searchQuery, loading, filteredItems, fetchMenuItems, fetchCategories } = useMenuQuery();
 
 const { visible: itemVisible, isEdit, saving, form, openCreate, openEdit, save } = useMenuItemForm(fetchMenuItems);
 
@@ -60,7 +60,3 @@ const handleToggleAvailability = async (item: any) => {
   await api.patch(`/menu-items/${item.id}/availability`);
 };
 </script>
-
-<style scoped>
-.menu-page { display: flex; flex-direction: column; gap: 16px; }
-</style>

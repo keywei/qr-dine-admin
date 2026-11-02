@@ -1,10 +1,12 @@
+import i18n from '../locales';
+
 export default {
-  1000: '未知系統例外',
-  1001: '網路連線中斷，請檢查網路設定',
-  1002: '網路連線逾時，伺服器無回應',
-  1003: '憑證無效或 Token 已過期',
-  1004: '登入驗證失敗，帳號或密碼錯誤',
-  1005: '身分權限校驗失敗',
-  1006: '資料解析失敗 (JSON Parse Error)',
-  1007: '安全金鑰校驗不通過',
+  1000: i18n.global.t('errorCode.1000'),
+  1001: i18n.global.t('errorCode.1001'),
+  1002: i18n.global.t('errorCode.1002'),
+  1003: i18n.global.t('errorCode.1003'),
+  1004: i18n.global.t('errorCode.1004'),
+  1005: i18n.global.t('errorCode.1005'),
+  1006: i18n.global.t('errorCode.1006'),
+  1007: i18n.global.t('errorCode.1007'),
 } as const;

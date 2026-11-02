@@ -1,7 +1,7 @@
 <template>
-  <div class="tables-page">
-    <div class="page-header">
-      <div class="header-left">
+  <div class="flex flex-col gap-4">
+    <div class="bg-white px-5 py-4 rounded-xl flex justify-between items-center shadow-sm">
+      <div class="flex gap-3">
         <el-button type="primary" @click="openCreate">
           <el-icon><Plus /></el-icon> {{ $t('tables.addTable') }}
         </el-button>
@@ -9,14 +9,14 @@
           <el-icon><Printer /></el-icon> {{ $t('tables.batchPrint') }}
         </el-button>
       </div>
-      <div class="header-right">
-        <span class="table-count-text">{{ $t('tables.totalCount', { count: tables.length }) }}</span>
+      <div>
+        <span class="text-sm text-slate-500 font-medium">{{ $t('tables.totalCount', { count: tables.length }) }}</span>
       </div>
     </div>
 
     <TakeoutQrCard :takeout-q-r="takeoutQR" @download="downloadQR" />
 
-    <div v-loading="loading" class="tables-grid">
+    <div v-loading="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       <TableCard
         v-for="table in tablesWithQR"
         :key="table.code"
@@ -66,10 +66,3 @@ const downloadQR = (dataUrl: string, filename: string) => {
   document.body.removeChild(link);
 };
 </script>
-
-<style scoped>
-.tables-page { display: flex; flex-direction: column; gap: 16px; }
-.page-header { background: #fff; padding: 16px 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-.table-count-text { font-size: 14px; color: #64748b; font-weight: 500; }
-.tables-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-</style>

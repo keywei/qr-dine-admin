@@ -28,7 +28,7 @@ export const useLayoutNav = () => {
   const onNewOrder = (order: Order) => {
     if (soundEnabled.value) playOrderBell();
     const msg = order.diningType === 'DINE_IN'
-      ? t('layout.newOrderMessageDineIn', { table: order.table?.code || '內用', orderNo: order.orderNo, total: order.totalAmount })
+      ? t('layout.newOrderMessageDineIn', { table: order.table?.code || t('common.dineIn'), orderNo: order.orderNo, total: order.totalAmount })
       : t('layout.newOrderMessageTakeout', { orderNo: order.orderNo, total: order.totalAmount });
 
     ElNotification({

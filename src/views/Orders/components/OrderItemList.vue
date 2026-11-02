@@ -1,12 +1,12 @@
 <template>
-  <div class="card-items">
-    <div v-for="item in items" :key="item.id" class="order-item-row">
-      <div class="item-name-col">
-        <span class="item-name">{{ item.name }}</span>
-        <span v-if="item.optionsText" class="item-options">({{ item.optionsText }})</span>
+  <div class="border-t border-b border-dashed border-slate-200 py-2.5 flex flex-col gap-2 max-h-[220px] overflow-y-auto">
+    <div v-for="item in items" :key="item.id" class="flex justify-between items-center text-sm">
+      <div class="flex-1">
+        <span class="font-semibold text-slate-800">{{ item.name }}</span>
+        <span v-if="item.optionsText" class="text-xs text-slate-500 ml-1.5">({{ item.optionsText }})</span>
       </div>
-      <div class="item-qty">x {{ item.quantity }}</div>
-      <div class="item-price">NT$ {{ item.price * item.quantity }}</div>
+      <div class="font-bold text-sky-600 px-4">x {{ item.quantity }}</div>
+      <div class="font-semibold text-slate-700">NT$ {{ item.price * item.quantity }}</div>
     </div>
   </div>
 </template>
@@ -16,27 +16,3 @@ import type { OrderItem } from '../../../types/order';
 
 defineProps<{ items: OrderItem[] }>();
 </script>
-
-<style scoped>
-.card-items {
-  border-top: 1px dashed #e2e8f0;
-  border-bottom: 1px dashed #e2e8f0;
-  padding: 10px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 220px;
-  overflow-y: auto;
-}
-.order-item-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-}
-.item-name-col { flex: 1; }
-.item-name { font-weight: 600; color: #1e293b; }
-.item-options { font-size: 12px; color: #64748b; margin-left: 6px; }
-.item-qty { font-weight: 700; color: #0284c7; padding: 0 16px; }
-.item-price { font-weight: 600; color: #334155; }
-</style>

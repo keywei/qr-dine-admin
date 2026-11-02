@@ -1,27 +1,18 @@
 <template>
-  <div class="dashboard-page" v-loading="loading">
+  <div class="flex flex-col gap-5">
     <StatsCards :stats="stats" />
-
-    <div class="dashboard-grid">
-      <TopDishesCard :dishes="stats.topDishes || []" @refresh="fetchStats" />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <TopDishesCard :dishes="stats.topDishes" />
       <StoreTipsCard />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useDashboardStats } from '../../composables/dashboard/useDashboardStats';
 import StatsCards from './components/StatsCards.vue';
 import TopDishesCard from './components/TopDishesCard.vue';
 import StoreTipsCard from './components/StoreTipsCard.vue';
-import { useDashboardStats } from '../../composables/dashboard/useDashboardStats';
 
-const { stats, loading, fetchStats } = useDashboardStats();
+const { stats } = useDashboardStats();
 </script>
-
-<style scoped>
-.dashboard-page { display: flex; flex-direction: column; gap: 20px; }
-.dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-@media (max-width: 900px) {
-  .dashboard-grid { grid-template-columns: 1fr; }
-}
-</style>

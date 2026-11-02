@@ -1,22 +1,22 @@
 <template>
   <el-dialog :model-value="visible" @update:model-value="$emit('update:visible', $event)" :title="$t('tables.batchPrintTitle')" width="800px">
-    <div class="print-toolbar">
+    <div class="flex items-center gap-4 mb-5">
       <el-button type="primary" size="large" @click="printWindow">
         <el-icon><Printer /></el-icon> {{ $t('tables.printNow') }}
       </el-button>
-      <span class="print-tip">{{ $t('tables.printTip') }}</span>
+      <span class="text-xs text-slate-500">{{ $t('tables.printTip') }}</span>
     </div>
 
-    <div class="print-preview-area" id="print-area">
-      <div v-for="t in tables" :key="t.id" class="acrylic-stand-card">
-        <div class="stand-store-name">{{ $t('tables.acrylicStoreName') }}</div>
-        <div class="stand-tag">{{ $t('tables.acrylicTag') }}</div>
-        <div class="stand-qr">
-          <img :src="t.qrCode" class="print-qr-img" />
+    <div class="grid grid-cols-2 gap-5 max-h-[500px] overflow-y-auto p-2.5" id="print-area">
+      <div v-for="t in tables" :key="t.id" class="border-2 border-slate-700 rounded-xl p-6 text-center flex flex-col items-center bg-white">
+        <div class="text-lg font-extrabold text-slate-800">{{ $t('tables.acrylicStoreName') }}</div>
+        <div class="text-xs text-sky-700 font-semibold mt-1">{{ $t('tables.acrylicTag') }}</div>
+        <div class="my-3.5 w-40 h-40">
+          <img :src="t.qrCode" class="w-full h-full" />
         </div>
-        <div class="stand-table-code">{{ $t('tables.acrylicTableCode', { code: t.code }) }}</div>
-        <div class="stand-table-name">({{ t.name }})</div>
-        <div class="stand-footer">{{ $t('tables.acrylicFooter') }}</div>
+        <div class="text-2xl font-black text-red-600">{{ $t('tables.acrylicTableCode', { code: t.code }) }}</div>
+        <div class="text-xs text-slate-500">({{ t.name }})</div>
+        <div class="text-[11px] text-slate-400 mt-2.5 border-t border-dashed border-slate-300 pt-2 w-full">{{ $t('tables.acrylicFooter') }}</div>
       </div>
     </div>
   </el-dialog>
@@ -31,17 +31,3 @@ defineEmits<{ (e: 'update:visible', val: boolean): void }>();
 
 const printWindow = () => window.print();
 </script>
-
-<style scoped>
-.print-toolbar { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.print-tip { font-size: 13px; color: #64748b; }
-.print-preview-area { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-height: 500px; overflow-y: auto; padding: 10px; }
-.acrylic-stand-card { border: 2px solid #334155; border-radius: 12px; padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; background: #fff; }
-.stand-store-name { font-size: 18px; font-weight: 800; color: #1e293b; }
-.stand-tag { font-size: 13px; color: #0369a1; font-weight: 600; margin-top: 4px; }
-.stand-qr { margin: 14px 0; width: 160px; height: 160px; }
-.print-qr-img { width: 100%; height: 100%; }
-.stand-table-code { font-size: 24px; font-weight: 900; color: #dc2626; }
-.stand-table-name { font-size: 13px; color: #64748b; }
-.stand-footer { font-size: 11px; color: #94a3b8; margin-top: 10px; border-top: 1px dashed #cbd5e1; padding-top: 8px; width: 100%; }
-</style>

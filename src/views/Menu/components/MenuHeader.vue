@@ -1,6 +1,6 @@
 <template>
-  <div class="page-header">
-    <div class="header-left">
+  <div class="bg-white px-5 py-4 rounded-xl flex justify-between items-center shadow-sm">
+    <div class="flex gap-3 items-center">
       <el-button type="primary" @click="$emit('openCreateItem')">
         <el-icon><Plus /></el-icon> {{ $t('menu.addItem') }}
       </el-button>
@@ -9,7 +9,7 @@
       </el-button>
     </div>
 
-    <div class="header-right">
+    <div class="flex gap-3 items-center">
       <el-select
         :model-value="selectedCategory"
         @update:model-value="$emit('update:selectedCategory', $event)"
@@ -48,16 +48,3 @@ defineEmits<{
   (e: 'openCategory'): void;
 }>();
 </script>
-
-<style scoped>
-.page-header {
-  background: #ffffff;
-  padding: 16px 20px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-.header-left, .header-right { display: flex; gap: 12px; align-items: center; }
-</style>

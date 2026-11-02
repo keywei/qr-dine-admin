@@ -1,17 +1,19 @@
 <template>
-  <el-card shadow="never" class="dash-card">
+  <el-card shadow="never" class="!rounded-xl !border-none">
     <template #header>
-      <div class="card-head">
-        <span class="head-title">{{ $t('dashboard.top5Title') }}</span>
+      <div class="flex justify-between items-center">
+        <span class="text-base font-bold text-slate-800">{{ $t('dashboard.top5Title') }}</span>
         <el-button type="primary" link @click="$emit('refresh')">{{ $t('dashboard.recalculate') }}</el-button>
       </div>
     </template>
 
-    <div v-if="dishes.length > 0" class="top-list">
-      <div v-for="(dish, idx) in dishes" :key="idx" class="top-item">
-        <div class="rank-badge" :class="'rank-' + (idx + 1)">{{ idx + 1 }}</div>
-        <div class="dish-info">
-          <span class="dish-name">{{ dish.name }}</span>
+    <div v-if="dishes.length > 0" class="flex flex-col gap-3.5">
+      <div v-for="(dish, idx) in dishes" :key="idx" class="flex items-center gap-3.5">
+        <div class="w-7 h-7 rounded-md flex items-center justify-center font-extrabold text-sm" :class="idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-slate-400 text-white' : idx === 2 ? 'bg-amber-700 text-white' : 'bg-slate-200 text-slate-600'">
+          {{ idx + 1 }}
+        </div>
+        <div class="flex-1 flex flex-col gap-1">
+          <span class="text-sm font-semibold text-slate-800">{{ dish.name }}</span>
           <el-progress
             :percentage="calcPercentage(dish.totalQuantity)"
             :stroke-width="8"
@@ -19,9 +21,9 @@
             :color="colors[idx % colors.length]"
           />
         </div>
-        <div class="dish-sold">
-          <span class="sold-num">{{ dish.totalQuantity }}</span>
-          <span class="sold-unit">{{ $t('common.unitPortion') }}</span>
+        <div class="flex items-baseline gap-0.5">
+          <span class="text-lg font-extrabold text-sky-600">{{ dish.totalQuantity }}</span>
+          <span class="text-xs text-slate-500">{{ $t('common.unitPortion') }}</span>
         </div>
       </div>
     </div>
@@ -42,20 +44,3 @@ const calcPercentage = (quantity: number) => {
   return Math.min(100, Math.round((quantity / max) * 100));
 };
 </script>
-
-<style scoped>
-.dash-card { border-radius: 12px; border: none; }
-.card-head { display: flex; justify-content: space-between; align-items: center; }
-.head-title { font-size: 16px; font-weight: 700; color: #1e293b; }
-.top-list { display: flex; flex-direction: column; gap: 14px; }
-.top-item { display: flex; align-items: center; gap: 14px; }
-.rank-badge { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; background-color: #e2e8f0; color: #475569; }
-.rank-1 { background-color: #f59e0b; color: #fff; }
-.rank-2 { background-color: #94a3b8; color: #fff; }
-.rank-3 { background-color: #b45309; color: #fff; }
-.dish-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
-.dish-name { font-size: 14px; font-weight: 600; color: #1e293b; }
-.dish-sold { display: flex; align-items: baseline; gap: 2px; }
-.sold-num { font-size: 18px; font-weight: 800; color: #0284c7; }
-.sold-unit { font-size: 12px; color: #64748b; }
-</style>

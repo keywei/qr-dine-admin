@@ -4,6 +4,7 @@ import { ElMessage } from 'element-plus';
 import type { ApiResponse } from '../types/api';
 import { codeToMessage } from '../errorCode';
 import { getToken, handleLogout } from '../utils/auth';
+import i18n from '../locales';
 
 const SUCCESS_CODE = [0];
 const BUSINESS_ERROR = 'BUSINESS_ERROR';
@@ -41,7 +42,7 @@ const errorHandle = (error: AxiosError<ApiResponse>) => {
 instance.interceptors.response.use((response: AxiosResponse<ApiResponse<unknown>>) => {
 	const { data } = response;
 	if (SUCCESS_CODE.includes(data.code)) return response;
-	return errorHandle(new AxiosError(data.message || '業務錯誤', BUSINESS_ERROR, response.config, response.request, response));
+	return errorHandle(new AxiosError(data.message || i18n.global.t('api.businessError'), BUSINESS_ERROR, response.config, response.request, response));
 }, errorHandle);
 
 const api = {
