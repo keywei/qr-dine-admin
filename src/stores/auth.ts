@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia';
 import api from '../api';
 import type { AdminUser, LoginForm, LoginResult } from '../types/auth';
+import { getToken, getUser, setToken, setUser, handleLogout } from '../utils/auth';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    token: localStorage.getItem('admin_token') || '',
-    user: (localStorage.getItem('admin_user')
-      ? JSON.parse(localStorage.getItem('admin_user')!)
-      : null) as AdminUser | null,
+    token: getToken(),
+    user: getUser<AdminUser>(),
   }),
   getters: {
     isAuthenticated: (state) => !!state.token,
@@ -18,8 +17,8 @@ export const useAuthStore = defineStore('auth', {
       if (data?.token) {
         this.token = data.token;
         this.user = data.user;
-        localStorage.setItem('admin_token', data.token);
-        localStorage.setItem('admin_user', JSON.stringify(data.user));
+        setToken(data.token);
+        setUser(data.user);
         return true;
       }
       return false;
@@ -27,9 +26,7 @@ export const useAuthStore = defineStore('auth', {
     logout(): void {
       this.token = '';
       this.user = null;
-      localStorage.removeItem('admin_token');
-      localStorage.removeItem('admin_user');
-      window.location.href = '/login';
+      handleLogout();
     },
   },
 });

@@ -3,6 +3,7 @@ import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
 import type { ApiResponse } from '../types/api';
 import { codeToMessage } from '../errorCode';
+import { getToken, handleLogout } from '../utils/auth';
 
 const SUCCESS_CODE = [0];
 const BUSINESS_ERROR = 'BUSINESS_ERROR';
@@ -13,37 +14,28 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-	const token = localStorage.getItem('admin_token');
+	const token = getToken();
 	if (token) config.headers.Authorization = `Bearer ${token}`;
 	return config;
 });
 
-const handleLogout = () => {
-  localStorage.removeItem('admin_token');
-  localStorage.removeItem('admin_user');
-  if (window.location.pathname !== '/login') {
-    window.location.href = '/login';
-  }
-};
-
 const errorHandle = (error: AxiosError<ApiResponse>) => {
-  const code = error.response?.data?.code;
-  const status = error.status;
-  const targetCode = code ?? status ?? 500;
-  const throwError = codeToMessage(error, targetCode);
+	let throwError = error;
+	const targetCode = error.response?.data?.code || error.status;
+	switch (error.status) {
+		case 401:
+		case 403:
+			throwError = codeToMessage(error, targetCode);
+			handleLogout();
+			break;
+		default:
+			throwError = codeToMessage(error, targetCode);
+			if (targetCode === 1003) handleLogout();
+			break;
+	}
 
-  switch (targetCode) {
-    case 401:
-    case 403:
-    case 1003:
-      handleLogout();
-      break;
-  }
-
-  if (!error.config?.silent) {
-    ElMessage.error(throwError.message);
-  }
-  return Promise.reject(throwError);
+	if (!error.config?.silent) ElMessage.error(throwError.message);
+	return Promise.reject(throwError);
 };
 
 instance.interceptors.response.use((response: AxiosResponse<ApiResponse<unknown>>) => {
