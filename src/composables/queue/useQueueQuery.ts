@@ -19,15 +19,13 @@ export const useQueueQuery = () => {
   const fetchData = async () => {
     loading.value = true;
     try {
-      const res = await api.get<{ list?: QueueTicket[]; stats?: AdminQueueStats } | QueueTicket[]>('/admin/queue');
+      const res = await api.get<{ tickets?: QueueTicket[]; list?: QueueTicket[]; stats?: AdminQueueStats } | QueueTicket[]>('/admin/queue');
       if (Array.isArray(res)) {
         tickets.value = res;
-      } else if (res && Array.isArray(res.list)) {
-        tickets.value = res.list;
+      } else if (res) {
+        tickets.value = res.tickets || res.list || [];
         if (res.stats) stats.value = res.stats;
       }
-      const statsRes = await api.get<AdminQueueStats>('/admin/queue/stats').catch(() => null);
-      if (statsRes) stats.value = statsRes;
     } catch {
       // 保持空陣列
     } finally {
