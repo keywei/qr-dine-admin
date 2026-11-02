@@ -49,12 +49,12 @@ const router = createRouter({
 router.beforeEach((to) => {
   const token = localStorage.getItem('admin_token');
   if (to.path !== '/login' && !token) {
-    return '/login';
+    return '/login'
+  } else if (to.path === '/login' && token) {
+    return '/orders'
+  } else {
+    return;
   }
-  if (to.path === '/login' && token) {
-    return '/orders';
-  }
-  return true;
 });
 
 export default router;
