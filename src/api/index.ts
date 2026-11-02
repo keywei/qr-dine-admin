@@ -19,19 +19,23 @@ instance.interceptors.request.use((config) => {
 });
 
 const errorHandle = (error: AxiosError<ApiResponse>) => {
-  let throwError = error;
   const status = error.response?.status;
   const code = error.response?.data?.code;
+  const targetCode = code ?? status ?? 500;
 
-  if (status === 401 || status === 403 || code === 1003) {
-    localStorage.removeItem('admin_token');
-    localStorage.removeItem('admin_user');
-    if (window.location.pathname !== '/login') {
-      window.location.href = '/login';
-    }
+  switch (targetCode) {
+    case 401:
+    case 403:
+    case 1003:
+      localStorage.removeItem('admin_token');
+      localStorage.removeItem('admin_user');
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+      break;
   }
 
-  throwError = code ? codeToMessage(error, code) : codeToMessage(error, status || 500);
+  const throwError = codeToMessage(error, targetCode);
 
   if (!error.config?.silent) {
     ElMessage.error(throwError.message);
