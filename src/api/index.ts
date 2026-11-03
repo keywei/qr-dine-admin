@@ -6,7 +6,7 @@ import { codeToMessage } from '../errorCode';
 import { getToken, handleLogout } from '../utils/auth';
 import i18n from '../locales';
 
-const SUCCESS_CODE = [0];
+const SUCCESS_CODE = [0, 201];
 const BUSINESS_ERROR = 'BUSINESS_ERROR';
 
 const instance = axios.create({

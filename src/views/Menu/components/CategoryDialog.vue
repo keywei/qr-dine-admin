@@ -5,7 +5,7 @@
       <el-button type="primary" @click="$emit('createCategory')">{{ $t('menu.addCategory') }}</el-button>
     </div>
 
-    <el-table :data="categories" style="width: 100%; margin-top: 16px" border size="small">
+    <el-table :data="categories" row-key="id" style="width: 100%; margin-top: 16px" border size="small">
       <el-table-column prop="name" :label="$t('menu.categoryName')" />
       <el-table-column prop="_count.items" :label="$t('menu.itemCount')" width="90" align="center" />
       <el-table-column :label="$t('common.actions')" width="100" align="center">

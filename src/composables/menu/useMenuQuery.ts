@@ -1,5 +1,6 @@
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import api from '../../api';
+import { getAdminSocket } from '../../socket';
 import type { Category, MenuItem } from '../../types/menu';
 
 export const useMenuQuery = () => {
@@ -35,6 +36,11 @@ export const useMenuQuery = () => {
   onMounted(() => {
     fetchCategories();
     fetchMenuItems();
+    getAdminSocket().on('category:updated', fetchCategories);
+  });
+
+  onUnmounted(() => {
+    getAdminSocket().off('category:updated', fetchCategories);
   });
 
   return {
