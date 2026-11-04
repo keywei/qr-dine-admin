@@ -4,6 +4,7 @@ export interface DiningTable {
   name: string;
   capacity: number;
   isActive: boolean;
+  serviceBellEnabled?: boolean;
   createdAt?: string;
 }
 
@@ -12,6 +13,7 @@ export interface TableQR {
   code?: string;
   name: string;
   capacity?: number;
+  serviceBellEnabled?: boolean;
   orderUrl: string;
   qrCode: string;
 }

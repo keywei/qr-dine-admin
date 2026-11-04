@@ -5,6 +5,7 @@ export interface StoreSetting {
   address?: string;
   phone?: string;
   businessHours?: string;
+  serviceBellEnabled?: boolean;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -15,4 +16,5 @@ export interface StoreSettingForm {
   address: string;
   phone: string;
   businessHours: string;
+  serviceBellEnabled: boolean;
 }

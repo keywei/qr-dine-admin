@@ -24,37 +24,45 @@
         @download="downloadQR"
         @edit="openEdit"
         @delete="(id) => id && deleteTable(id)"
+        @toggle-bell="onToggleBell"
       />
     </div>
 
-    <TableDialog
-      v-model:visible="tableDialogVisible"
-      :is-edit="isEdit"
-      :form="form"
-      @save="save"
-    />
-
-    <BatchPrintDialog
-      v-model:visible="batchPrintVisible"
-      :tables="tablesWithQR"
-    />
+    <TableDialog v-model:visible="tableDialogVisible" :is-edit="isEdit" :form="form" @save="save" />
+    <BatchPrintDialog v-model:visible="batchPrintVisible" :tables="tablesWithQR" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Plus, Printer } from '@element-plus/icons-vue';
+import { ElMessage } from 'element-plus';
 import TakeoutQrCard from './components/TakeoutQrCard.vue';
 import TableCard from './components/TableCard.vue';
 import TableDialog from './components/TableDialog.vue';
 import BatchPrintDialog from './components/BatchPrintDialog.vue';
 import { useTableQuery } from '../../composables/table/useTableQuery';
 import { useTableForm } from '../../composables/table/useTableForm';
+import { serviceBellApi } from '../../api/serviceBell';
+import type { TableQR } from '../../types/table';
+import i18n from '../../locales';
 
 const { tables, tablesWithQR, takeoutQR, loading, fetchTables } = useTableQuery();
 const { visible: tableDialogVisible, isEdit, form, openCreate, openEdit, save, deleteTable } = useTableForm(fetchTables);
 
 const batchPrintVisible = ref(false);
+
+const onToggleBell = async (table: TableQR, enabled: boolean) => {
+  if (!table.id) return;
+  try {
+    await serviceBellApi.setTableSwitch(table.id, enabled);
+    const status = enabled ? i18n.global.t('serviceBell.statusOn') : i18n.global.t('serviceBell.statusOff');
+    ElMessage.success(i18n.global.t('serviceBell.toggleSuccess', { code: table.code, status }));
+    await fetchTables();
+  } catch {
+    ElMessage.error(i18n.global.t('serviceBell.toggleFailed'));
+  }
+};
 
 const downloadQR = (dataUrl: string, filename: string) => {
   if (!dataUrl) return;

@@ -16,6 +16,7 @@ export const useStoreSetting = () => {
     address: '',
     phone: '',
     businessHours: '',
+    serviceBellEnabled: true,
   });
 
   const fetchSetting = async () => {
@@ -28,6 +29,7 @@ export const useStoreSetting = () => {
         form.address = data.address || '';
         form.phone = data.phone || '';
         form.businessHours = data.businessHours || '';
+        form.serviceBellEnabled = data.serviceBellEnabled ?? true;
       }
     } catch {
       ElMessage.error(t('store.loadError'));
@@ -52,22 +54,17 @@ export const useStoreSetting = () => {
     }
     saving.value = true;
     try {
-      await api.put<StoreSetting>('/store', form);
+      await api.put('/store', form);
+      // 同步全店服務鈴總開關
+      await api.patch('/service-bell/global', { enabled: form.serviceBellEnabled });
       ElMessage.success(t('store.saveSuccess'));
-      visible.value = false;
+      closeDialog();
+    } catch {
+      ElMessage.error(t('store.saveError'));
     } finally {
       saving.value = false;
     }
   };
 
-  return {
-    visible,
-    loading,
-    saving,
-    form,
-    fetchSetting,
-    openDialog,
-    closeDialog,
-    save,
-  };
+  return { form, visible, loading, saving, fetchSetting, openDialog, closeDialog, save };
 };

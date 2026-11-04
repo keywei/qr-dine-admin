@@ -12,8 +12,13 @@
       <el-image :src="table.qrCode" fit="contain" class="w-full h-full" :preview-src-list="[table.qrCode]" preview-teleported />
     </div>
 
-    <div class="w-full text-center">
-      <span class="text-[11px] text-slate-400 break-all">{{ table.orderUrl }}</span>
+    <div class="w-full flex justify-between items-center px-1 text-xs text-slate-600 bg-slate-50 py-1.5 rounded">
+      <span class="font-medium">{{ $t('serviceBell.tableSwitchLabel') }}</span>
+      <el-switch
+        :model-value="table.serviceBellEnabled ?? true"
+        size="small"
+        @change="(val: any) => $emit('toggle-bell', table, Boolean(val))"
+      />
     </div>
 
     <div class="w-full flex justify-around border-t border-slate-100 pt-2">
@@ -39,5 +44,6 @@ defineEmits<{
   (e: 'download', url: string, filename: string): void;
   (e: 'edit', table: TableQR): void;
   (e: 'delete', id?: number): void;
+  (e: 'toggle-bell', table: TableQR, enabled: boolean): void;
 }>();
 </script>

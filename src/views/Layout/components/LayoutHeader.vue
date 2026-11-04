@@ -3,7 +3,8 @@
     <div class="flex items-center">
       <h3 class="m-0 text-lg font-bold text-slate-800">{{ title }}</h3>
     </div>
-    <div class="flex items-center gap-5">
+    <div class="flex items-center gap-4">
+      <ServiceBellBadge />
       <div class="flex items-center gap-2">
         <el-avatar size="small" style="background-color: #3b82f6">{{ userName?.[0] || $t('common.adminAvatar') }}</el-avatar>
         <span class="text-sm font-semibold text-slate-700">{{ userName || $t('layout.userDefault') }}</span>
@@ -17,6 +18,7 @@
 
 <script setup lang="ts">
 import { SwitchButton } from '@element-plus/icons-vue';
+import ServiceBellBadge from './ServiceBellBadge.vue';
 
 defineProps<{ title: string; userName?: string }>();
 defineEmits<{ (e: 'logout'): void }>();

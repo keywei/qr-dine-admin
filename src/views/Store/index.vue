@@ -29,6 +29,16 @@
         <el-form-item :label="$t('store.businessHours')">
           <el-input v-model="form.businessHours" :placeholder="$t('store.businessHoursPlaceholder')" />
         </el-form-item>
+        <el-form-item :label="$t('serviceBell.globalSwitchLabel')">
+          <div class="flex items-center gap-3">
+            <el-switch
+              v-model="form.serviceBellEnabled"
+              :active-text="$t('serviceBell.globalSwitchActive')"
+              :inactive-text="$t('serviceBell.globalSwitchInactive')"
+            />
+            <span class="text-xs text-slate-400">{{ $t('serviceBell.globalSwitchDesc') }}</span>
+          </div>
+        </el-form-item>
         <div class="pt-2">
           <el-button type="primary" :loading="saving" @click="save">
             {{ $t('common.save') }}

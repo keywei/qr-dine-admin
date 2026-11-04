@@ -294,5 +294,29 @@
     "seatSuccess": "號碼牌 #{no} 已安排入座！",
     "cancelSuccess": "號碼牌 #{no} 已標記過號取消！",
     "callNextSuccess": "已呼叫下一組等待顧客！"
+  },
+  "serviceBell": {
+    "badgeTitle": "🛎️ 待處理服務呼叫 ({count})",
+    "emptyTip": "目前無待處理的服務呼叫",
+    "table": "{code} 桌",
+    "completed": "已處理",
+    "refresh": "刷新",
+    "notificationTitle": "🛎️ 桌號 {table} 服務呼叫",
+    "globalSwitchLabel": "🛎️ 全店服務鈴總開關",
+    "globalSwitchActive": "已開啟",
+    "globalSwitchInactive": "已關閉",
+    "globalSwitchDesc": "關閉後所有桌位的顧客手機端將隱藏服務鈴功能",
+    "tableSwitchLabel": "🛎️ 服務鈴開關",
+    "toggleSuccess": "桌號 {code} 服務鈴已{status}",
+    "toggleFailed": "切換失敗，請稍候重試",
+    "statusOn": "開啟",
+    "statusOff": "關閉",
+    "types": {
+      "WATER": "加水 / 添茶",
+      "UTENSILS": "餐具 / 紙巾",
+      "CLEAN": "清理桌面",
+      "ASSIST": "人員協助",
+      "OTHER": "其他需求"
+    }
   }
 }
