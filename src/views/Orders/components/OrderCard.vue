@@ -40,12 +40,12 @@
       <span>{{ order.customerNote }}</span>
     </div>
 
-    <div class="flex justify-between items-center mt-auto pt-2">
-      <div class="flex items-baseline gap-1.5">
-        <span class="text-xs text-slate-500">{{ $t('orders.totalPrefix') }}</span>
-        <span class="text-xl font-extrabold text-rose-600">NT$ {{ order.totalAmount }}</span>
+    <div class="flex justify-between items-center mt-auto pt-2 border-t border-slate-100">
+      <div class="flex items-baseline gap-1.5 shrink-0 whitespace-nowrap">
+        <span class="text-xs text-slate-500 whitespace-nowrap">{{ $t('orders.totalPrefix') }}</span>
+        <span class="text-lg font-black text-rose-600 whitespace-nowrap">NT$ {{ order.totalAmount }}</span>
       </div>
-      <div class="flex gap-2 items-center">
+      <div class="flex gap-2 items-center shrink-0">
         <el-button v-if="order.status === 'PENDING_PAYMENT'" type="success" @click="$emit('confirmPayment', order)">
           {{ $t('orders.confirmPayment') }}
         </el-button>

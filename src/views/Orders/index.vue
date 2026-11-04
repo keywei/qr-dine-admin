@@ -11,7 +11,7 @@
       @refresh="fetchOrders"
     />
 
-    <div v-loading="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 min-w-0">
+    <div v-loading="loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 min-w-0">
       <el-empty v-if="filteredOrders.length === 0" class="col-span-full" :description="$t('orders.noOrders')" />
       <OrderCard
         v-for="order in filteredOrders"
