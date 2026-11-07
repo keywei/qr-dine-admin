@@ -15,7 +15,16 @@ export const useTableQuery = () => {
         api.get<BatchQRsResponse>('/tables/batch/qrcodes'),
         api.get<DiningTable[]>('/tables'),
       ]);
-      tablesWithQR.value = batch?.tables || [];
+      const tableMap = new Map((list || []).map((t) => [t.code, t]));
+      tablesWithQR.value = (batch?.tables || []).map((qr) => {
+        const found = qr.code ? tableMap.get(qr.code) : undefined;
+        return {
+          ...found,
+          ...qr,
+          id: qr.id ?? found?.id,
+          serviceBellEnabled: qr.serviceBellEnabled ?? found?.serviceBellEnabled ?? true,
+        };
+      });
       takeoutQR.value = batch?.takeout || null;
       tables.value = list || [];
     } finally {

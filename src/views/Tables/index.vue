@@ -54,12 +54,15 @@ const batchPrintVisible = ref(false);
 
 const onToggleBell = async (table: TableQR, enabled: boolean) => {
   if (!table.id) return;
+  const prev = table.serviceBellEnabled;
+  table.serviceBellEnabled = enabled;
   try {
     await serviceBellApi.setTableSwitch(table.id, enabled);
     const status = enabled ? i18n.global.t('serviceBell.statusOn') : i18n.global.t('serviceBell.statusOff');
     ElMessage.success(i18n.global.t('serviceBell.toggleSuccess', { code: table.code, status }));
     await fetchTables();
   } catch {
+    table.serviceBellEnabled = prev;
     ElMessage.error(i18n.global.t('serviceBell.toggleFailed'));
   }
 };
